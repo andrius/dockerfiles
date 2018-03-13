@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  butterfly:
+    build: .
+    ports:
+      - 57575:57575
