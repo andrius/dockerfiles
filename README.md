@@ -1,7 +1,10 @@
 Dockerized applications
 =======================
 
-# Butterfly
+# curl
+Command line tool and library for transferring data with URLs. https://curl.haxx.se
+
+# butterfly
 A web terminal based on websocket https://github.com/paradoxxxzero/butterfly
 
 # ifconfig.co
