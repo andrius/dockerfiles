@@ -2,6 +2,9 @@ version: '3'
 
 services:
   butterfly:
-    build: .
+    image: andrius/butterfly
     ports:
-      - 57575:57575
+      - 0.0.0.0:57575:57575
+    environment:
+      - BUTTERFLY_USER=ak
+      - BUTTERFLY_PASSWORD=ak123ak
