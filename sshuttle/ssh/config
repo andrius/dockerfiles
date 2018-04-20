@@ -1,0 +1,23 @@
+Host *
+    UseRoaming no
+    Port 22
+    TCPKeepAlive no
+    ServerAliveInterval 5
+    ServerAliveCountMax 4
+    ConnectionAttempts 3
+    ExitOnForwardFailure yes
+    Compression yes
+    IdentityFile ~/.ssh/id_rsa
+    ForwardAgent yes
+    IdentitiesOnly yes
+    ForwardX11 no
+    TunnelDevice any:any
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    HashKnownHosts no
+    CheckHostIP no
+    PermitLocalCommand yes
+    ControlMaster auto
+    ControlPath  /tmp/ssh/ssh-control-%r-%h-%p
+    SendEnv LANG LANGUAGE LC_*
+    LogLevel ERROR
