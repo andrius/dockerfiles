@@ -44,7 +44,7 @@ RUN chown -R alpine:alpine /home/alpine
 # prepare xrdp key
 RUN xrdp-keygen xrdp auto
 
-EXPOSE 3389 22
+EXPOSE 5900 3389 22
 VOLUME ["/etc/ssh"]
 ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
