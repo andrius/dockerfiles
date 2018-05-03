@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  gui:
+    build: .
+    shm_size: '1gb'
+    environment:
+      - LOGIN_PASSWORD=p@sSw0rd
+    # volumes:
+    #   - ./mozilla:/home/alpine/.mozilla
+    ports:
+      - 3389:3389
+      - 5900:5900
