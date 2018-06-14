@@ -1,11 +1,7 @@
 FROM alpine
 
-RUN apk \
-      --update \
-      --no-cache \
-      --allow-untrusted \
-      --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ \
-    add sslh \
+RUN apk --update --no-cache --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ add \
+      sslh \
 && rm -rf /var/cache/apk/* \
           /tmp/* \
           /var/tmp/*
