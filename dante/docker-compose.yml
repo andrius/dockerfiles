@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  dante:
+    image: andrius/dante
+    network_mode: host
+    environment:
+      - SOCKS_LISTEN=0.0.0.0
+      - SOCKS_PORT=1010
+      - SOCKS_GATEWAY=ens2
+      - SOCKS_AUTH=username
+      - SOCKS_USERNAME=s0cks_user
+      - SOCKS_PASSWORD=socks_passw0rd
+
+
