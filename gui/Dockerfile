@@ -3,6 +3,8 @@ FROM alpine:edge
 # add packages
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk --update --no-cache add \
+      bash \
+      mc \
       xrdp \
       xvfb \
       alpine-desktop \
@@ -46,5 +48,7 @@ RUN xrdp-keygen xrdp auto
 
 EXPOSE 5900 3389 22
 VOLUME ["/etc/ssh"]
+
+SHELL ["bash", "-c"]
 ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
