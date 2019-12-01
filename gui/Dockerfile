@@ -1,4 +1,7 @@
+# vim:set ft=dockerfile:
 FROM alpine:edge
+
+LABEL maintainer="Andrius Kairiukstis <k@andrius.mobi>"
 
 # add packages
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
@@ -7,7 +10,6 @@ RUN apk --update --no-cache add \
       mc \
       xrdp \
       xvfb \
-      alpine-desktop \
       xfce4 \
       xfce4-xkb-plugin-lang \
       thunar-volman \
@@ -22,14 +24,32 @@ RUN apk --update --no-cache add \
       openssh \
       util-linux \
       dbus \
-      wireshark \
       ttf-freefont \
       xauth \
       supervisor \
       x11vnc \
       sudo \
-&& rm -rf /tmp/* \
-          /var/cache/apk/*
+&& rm -rf /tmp/*
+
+# RUN apk --update --no-cacke add
+#       alpine-desktop \
+# && rm -rf /tmp/* \
+
+RUN apk --update --no-cache add \
+      aspell-en \
+      dhcpcd \
+      dhcpcd-ui \
+      dhcpcd-dbus \
+      firefox \
+      gnumeric \
+      ristretto \
+      xorg-server \
+      xf86-video-dummy \
+      xscreensaver \
+      ca-certificates \
+      poppler \
+      poppler-glib \
+&& rm -rf /tmp/*
 
 # add scripts/config
 ADD etc /etc
