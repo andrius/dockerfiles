@@ -1,4 +1,7 @@
+# vim:set ft=dockerfile:
 FROM alpine
+
+LABEL maintainer="Andrius Kairiukstis <k@andrius.mobi>"
 
 RUN apk --update --no-cache --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ add \
       sslh \
