@@ -1,67 +1,93 @@
 # vim:set ft=dockerfile:
-FROM alpine:edge
+FROM alpine:3.13
 
 LABEL maintainer="Andrius Kairiukstis <k@andrius.mobi>"
 
-# add packages
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk --update --no-cache add \
-      bash \
-      mc \
-      xrdp \
-      xvfb \
-      xfce4 \
-      xfce4-xkb-plugin-lang \
-      thunar-volman \
-      faenza-icon-theme \
-      paper-gtk-theme \
-      paper-icon-theme \
-      slim \
-      xf86-input-synaptics \
-      xf86-input-mouse \
-      xf86-input-keyboard \
-      setxkbmap \
-      openssh \
-      util-linux \
-      dbus \
-      ttf-freefont \
-      xauth \
-      supervisor \
-      x11vnc \
-      sudo \
-&& rm -rf /tmp/*
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+&&  echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+&&  echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-# RUN apk --update --no-cacke add
-#       alpine-desktop \
-# && rm -rf /tmp/* \
-
-RUN apk --update --no-cache add \
+RUN set -x \
+&&  apk add --no-cache --purge -uU \
+      libdaemon \
+      eudev \
+      alsa-lib \
+      alsa-utils \
       aspell-en \
+      avahi \
+      bash \
+      bluez \
+      bluez-firmware \
+      bluez-libs \
+      ca-certificates \
+      curl \
+      dbus \
       dhcpcd \
-      dhcpcd-ui \
       dhcpcd-dbus \
+      dhcpcd-ui \
+      expect \
+      faenza-icon-theme \
       firefox \
       gnumeric \
-      ristretto \
-      xorg-server \
-      xf86-video-dummy \
-      xscreensaver \
-      ca-certificates \
+      libconfig \
+      libressl3.1-libcrypto \
+      mc \
+      mpg123 \
+      openssh \
+      paper-gtk-theme \
+      paper-icon-theme \
       poppler \
       poppler-glib \
-&& rm -rf /tmp/*
+      popt \
+      pulseaudio \
+      pulseaudio-alsa \
+      pulseaudio-bluez \
+      pulseaudio-dev \
+      pulseaudio-jack \
+      pulseaudio-utils \
+      pulseaudio-zeroconf \
+      python3 \
+      py3-pip \
+      ristretto \
+      setxkbmap \
+      slim \
+      soxr \
+      sudo \
+      supervisor \
+      thunar-volman \
+      ttf-freefont \
+      util-linux \
+      x11vnc \
+      xauth \
+      xf86-input-vmmouse \
+      xf86-input-synaptics \
+      xf86-video-dummy \
+      xfce4 \
+      xfce4-terminal \
+      xfce4-xkb-plugin-lang \
+      xorg-server \
+      xrdp \
+      xscreensaver \
+      xvfb \
+&&  pip install --upgrade setuptools \
+&&  rm -rf /var/cache/apk/* \
+           /tmp/*
+
+RUN  curl -o /usr/local/bin/pulsemixer -jkSL \
+             https://raw.githubusercontent.com/GeorgeFilipkin/pulsemixer/master/pulsemixer \
+&&  chmod +x /usr/local/bin/pulsemixer
 
 # add scripts/config
 ADD etc /etc
 ADD docker-entrypoint.sh /bin
 
-# prepare user alpine
-RUN addgroup alpine \
-&& adduser  -G alpine -s /bin/sh -D alpine \
-&& echo "alpine:alpine" | /usr/sbin/chpasswd \
-&& echo "alpine    ALL=(ALL) ALL" >> /etc/sudoers
-ADD alpine /home/alpine
-RUN chown -R alpine:alpine /home/alpine
+# prepare user ak
+RUN addgroup ak \
+&& adduser  -G ak -s /bin/sh -D ak \
+&& echo "ak:ak" | /usr/sbin/chpasswd \
+&& echo "ak    ALL=(ALL) ALL" >> /etc/sudoers
+ADD home /home/ak
+RUN chown -R ak:ak /home/ak
 
 # prepare xrdp key
 RUN xrdp-keygen xrdp auto
