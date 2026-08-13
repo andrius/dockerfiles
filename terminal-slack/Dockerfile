@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:23.11.1-alpine3.21
 
 # To get token, visit
 # https://api.slack.com/custom-integrations/legacy-tokens
