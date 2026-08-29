@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3
 
 ENV SSH_USERNAME            my-username
 ENV SSH_PASSWORD            good-try-dude
