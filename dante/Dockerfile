@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.23.3
 
 RUN apk add --update --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ \
       dante-server \
